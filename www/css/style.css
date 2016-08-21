@@ -1,0 +1,44 @@
+.fontf{
+    font-family: 'Open Sans',sans-serif;
+    font-weight: 200;
+    font-size: 16px;
+    line-height: 26px;
+    letter-spacing: .065em;
+    margin-bottom: 20px;
+      color: #000;
+}
+.tempdiv{
+	text-align:center;
+	width:100%;
+}
+.citytemp{
+	font-size: 26px;
+}
+.lastuptemp{
+	font-size: 10px;
+}
+.blackheadbar{
+	background-color: #000;
+	border-color: #000;
+}
+.newsbar{
+	justify-content:center;
+}
+h2.story-title{
+	white-space: normal;
+}
+p.story-desc{
+	white-space: normal;
+	height:auto;
+}
+.maininfo{
+	color:#fff;
+}
+.redditheadbar{
+	background-color: #cee3f8;
+	border-color: #cee3f8;
+}
+.textwhite{
+	color:#fff;
+}
+
