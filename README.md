@@ -1,6 +1,6 @@
 # Wpdate ~ Repository Main 
 
-Mobile App feito para uso pessoal, com foco em JSON possibilita consultar temperatura, cotação do dolar, notícias  na CNN, notícias  no The New York Times, REDDIT/top e REDDIT/funny(imgs).<br/>
+Mobile App feito para uso pessoal, com foco em JSON possibilita consultar previsão do tempo, cotação do dolar, notícias  na CNN, notícias  no The New York Times, REDDIT/top e REDDIT/funny(imgs).<br/>
 Feito utilizando HTML, CSS, JavaScript, Apache Cordova, Ionic,  Angular, bower e npm.
 <br/><br/><br/><br/>
 <div align="center">
