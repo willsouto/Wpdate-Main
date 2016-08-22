@@ -1,122 +1,163 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title>Wpdate</title>
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
-    <script src="lib/moment/moment.js"></script>
-    <script src="lib/angular-moment/angular-moment.js"></script>
-    <script src="cordova.js"></script>
-    <script src="js/app.js"></script>
-  </head>
-  <body ng-app="myreddit" ng-controller="RedditCtrl">
-    <ion-pane>
-    <!-- Slider -->
-      <ion-slides>
-                <!-- Home page START -->
-                <ion-slide-page>
-                  <ion-header-bar class="newsbar blackheadbar">
-                    <h1 class="title textwhite">Wpdate!</h1>
-                  </ion-header-bar>
-                  <ion-content class="homebg">
-                    <div class="tempdiv"><br/>
-                      <div class="list"><br/>
-                        <h3 class="fontf citytemp">{{result.current_observation.display_location.city}} </h3>
-                        <h3 class="fontf">{{result.forecast.simpleforecast.forecastday[0].date.pretty}}</h3><br/>
-                        <div class=item style="background-color:#000">
-                         <span class="fontf maininfo">${{resultd.query.results.rate.Rate}}</span><br/>
-                       </div>
-                       <div class=item><br/>
-                        <span class="fontf citytemp">{{result.current_observation.temp_c}} ºC</span><br/><br/>
-                        <h3 class="fontf"><span style="color:#3333ff">{{result.forecast.simpleforecast.forecastday[0].low.celsius}} ºC</span> - <span style="color:#b30000">{{result.forecast.simpleforecast.forecastday[0].high.celsius}} ºC</span></h3>
-                        <img src="{{result.current_observation.icon_url}}">
-                        <h3 class="fontf"> {{result.current_observation.weather}} </h3>
-                        <h3 class="fontf"> 
-                          {{result.forecast.forecastday}}</h3><br/>
-                          <h3 class="fontf">Dia: {{result.forecast.txt_forecast.forecastday[0].fcttext_metric}}</h3>
-                          <h3 class="fontf">Noite: {{result.forecast.txt_forecast.forecastday[1].fcttext_metric}}</h3><br/>
-                          <h3 class="fontf lastuptemp">{{result.current_observation.observation_time}} </h3>
-                        </div>
-                      </div>
-                    </div>
-                  </ion-content>
-                </ion-slide-page>
-                <!-- Home page END -->
-                <!-- CNN page START -->
-                <ion-slide-page>
-                  <ion-header-bar class="newsbar blackheadbar" >
-                    <img src="/img/logo_cnn_badge_2up.png"/>
-                  </ion-header-bar>
-                  <ion-content>
-                    <div class="list">
-                      <a  class="item item-thumbnail-left" ng-click="openLink(storycnn.url)" href="{{storycnn.url}}" target="_blank" ng-repeat="storycnn in storiescnn">
-
-                        <img ng-src="{{storycnn.urlToImage}}" >
-                        <h2 class="story-title">{{storycnn.title}}</h2>
-                        <!-- tempo e domain -->
-                        <p class="story-desc">
-                          {{storycnn.description}}
-                        </p>
-                      </a>
-                    </div>
-                  </ion-content>
-                </ion-slide-page>
-                <!-- CNN page END -->
-                <!-- NYT page START -->
-                <ion-slide-page>
-                  <ion-header-bar class="bar-stable" style="justify-content:center;">
-                    <img src="/img/New-York-Times-Logo.jpg"/>
-                  </ion-header-bar>
-                  <ion-content>
-                    <div class="list">
-                      <a  class="item item-thumbnail-left" ng-click="openLink(storynyt.url)" href="{{storynyt.url}}" target="_blank" ng-repeat="storynyt in storiesnyt">
-
-                        <img ng-src="{{storynyt.urlToImage}}" >
-                        <h2 class="story-title">{{storynyt.title}}</h2>
-                        <!-- tempo e domain -->
-                        <p class="story-desc">
-                          {{storynyt.description}}
-                        </p>
-                      </a>
-                    </div>
-                  </ion-content>
-                </ion-slide-page>
-                <!-- NYT page END -->
-                <!-- REDDIT page START -->
-                <ion-slide-page>
-                 <ion-header-bar class="newsbar redditheadbar" >
-                  <img src="/img/reddit.jpg"/>
-                </ion-header-bar>
-                <ion-content>
-                  <!-- refresh no pull up -->
-                  <ion-refresher
-                  pulling-text="Pull to refresh..."
-                  on-refresh="loadNewerStories()">
-                </ion-refresher>
-                <!-- Div lista Reddit -->
-                <div class="list">
-                  <a  class="item item-thumbnail-left" ng-click="openLink(story.url)" href="{{story.url}}" target="_blank" ng-repeat="story in stories track by story.id">
-                    <img ng-src="{{story.thumbnail}}" >
-                    <h2 class="story-title">{{story.title}}</h2>
-                    <!-- tempo e domain -->
-                    <p>
-                      <span am-time-ago="story.created_utc" am-preprocess="unix"></span>
-                      - {{story.domain}}
-                    </p>
-                  </a>
-                </div>
-                <!-- Div lista Reddit END -->
-                <!-- pull older stories no scroll down -->
-                <ion-infinite-scroll on-infinite="loadOlderStories()" distance="1%">
-                </ion-infinite-scroll>
-              </ion-content>
-            </ion-slide-page>
-            <!-- REDDIT page END -->
-      </ion-slides>
-    <!-- Slider END -->
-    </ion-pane>
-  </body>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<title>Wpdate</title>
+	<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<script src="lib/ionic/js/ionic.bundle.js"></script>
+	<script src="lib/moment/moment.js"></script>
+	<script src="lib/angular-moment/angular-moment.js"></script>
+	<script src="cordova.js"></script>
+	<script src="js/app.js"></script>
+</head>
+<body ng-app="wpdate" ng-controller="WpdateCtrl">
+	<ion-pane>
+		<!-- Slider -->
+		<ion-slides>
+			<!-- Home page START -->
+			<ion-slide-page>
+				<ion-header-bar class="newsbar blackheadbar">
+					<h1 class="title textwhite">Wpdate!</h1>
+				</ion-header-bar>
+				<ion-content class="homebg">
+					<div class="tempdiv"><br/>
+						<div class="list">
+							<!-- Cidade + data -->
+							<h3 class="fontf citytemp">{{result.current_observation.display_location.city}} </h3>
+							<h3 class="fontf">{{result.current_observation.local_time_rfc822}}</h3>
+							<div class=item style="background-color:#000">
+								<!-- dolar + last up do dolar-->
+								<span class="fontf dolarinfo">{{resultd.query.results.rate.Name}} {{resultd.query.results.rate.Rate}}</span> <br/><span class="fontf dolarcheck">
+								Last Check: {{resultd.query.results.rate.Time}} - {{resultd.query.results.rate.Date}}</span><br/>
+							</div>
+							<div class=item><br/>
+								<!-- temperatura -->
+								<span class="fontf citytemp">{{result.current_observation.temp_c}} ºC</span><br/><br/>
+								<img src="{{result.current_observation.icon_url}}">
+								<h3 class="fontf"> {{result.current_observation.weather}} </h3><br/>
+								<h3 class="fontf"><span style="color:#3333ff">{{result.forecast.simpleforecast.forecastday[0].low.celsius}} ºC</span> - <span style="color:#b30000">{{result.forecast.simpleforecast.forecastday[0].high.celsius}} ºC</span></h3>
+								<h3 class="fontf"> 
+									{{result.forecast.forecastday}}</h3><br/>
+									<div class="list">
+										<div class="item">
+											<span class="forecastinfo">Dia: {{result.forecast.txt_forecast.forecastday[0].fcttext_metric}}</span><br/>
+										</div>
+										<div class="item">
+											<span class="forecastinfo">Noite: {{result.forecast.txt_forecast.forecastday[1].fcttext_metric}}</span><br/>
+										</div>
+									</div>
+									<span class="lastuptemp">{{result.current_observation.observation_time}} </span>
+								</div>
+							</div>
+						</div>
+					</ion-content>
+				</ion-slide-page>
+				<!-- Home page END -->
+				<!-- CNN page START -->
+				<ion-slide-page>
+					<ion-header-bar class="newsbar blackheadbar" >
+						<img src="/img/logo_cnn_badge_2up.png"/>
+					</ion-header-bar>
+					<ion-content>
+						<div class="list">
+							<a  class="item item-thumbnail-left" ng-click="openLink(storycnn.url)" href="{{storycnn.url}}" target="_blank" ng-repeat="storycnn in storiescnn" ng-if="$index != 0">
+								<img ng-src="{{storycnn.urlToImage}}" >
+								<h2 class="story-title">
+									{{storycnn.title}}
+								</h2>
+								<!-- tempo e domain -->
+								<p class="story-desc">
+									{{storycnn.description}}
+								</p><br/>
+								<p class="story-desc"><img  src="/img/clock.png" class="clock" />
+									<span am-time-ago="storycnn.publishedAt" am-preprocess="am-time-ago"></span>
+								</p>
+							</a>
+						</div>
+					</ion-content>
+				</ion-slide-page>
+				<!-- CNN page END -->
+				<!-- NYT page START -->
+				<ion-slide-page>
+					<ion-header-bar class="bar-stable" style="justify-content:center;">
+						<img src="/img/New-York-Times-Logo.jpg"/>
+					</ion-header-bar>
+					<ion-content>
+						<div class="list">
+							<a  class="item item-thumbnail-left" ng-click="openLink(storynyt.url)" href="{{storynyt.url}}" target="_blank" ng-repeat="storynyt in storiesnyt">
+								<img ng-src="{{storynyt.urlToImage}}" >
+								<h2 class="story-title">{{storynyt.title}}</h2>
+								<!-- tempo e domain -->
+								<p class="story-desc">
+									{{storynyt.description}}
+								</p><br/>
+								<p class="story-desc"><img  src="/img/clock.png" class="clock" />
+									<span am-time-ago="storynyt.publishedAt" am-preprocess="am-time-ago"></span>
+								</p>
+							</a>
+						</div>
+					</ion-content>
+				</ion-slide-page>
+				<!-- NYT page END -->
+				<!-- REDDIT page START -->
+				<ion-slide-page>
+					<ion-header-bar class="newsbar redditheadbar" >
+						<img src="/img/reddit.jpg"/"><a class="reddittitle">/top</a>
+					</ion-header-bar>
+					<ion-content>
+						<!-- refresh no pull up -->
+						<ion-refresher
+						pulling-text="Pull to refresh..."
+						on-refresh="loadNewerStories()">
+					</ion-refresher>
+					<!-- Div lista START -->
+					<div class="list">
+						<a  class="item item-thumbnail-left" ng-click="openLink(story.url)" href="{{story.url}}" target="_blank" ng-repeat="story in stories track by story.id">
+							<img ng-src="{{story.thumbnail}}" >
+							<h2 class="redditstory-title">{{story.title}}</h2>
+							<!-- tempo e domain --><br/>
+							<p><img  src="/img/clock.png" class="clock" />
+								<span am-time-ago="story.created_utc" am-preprocess="unix"></span>
+								- {{story.domain}}
+							</p>
+						</a>
+					</div>
+					<!-- Div lista END -->
+					<!-- pull older stories no scroll down -->
+					<ion-infinite-scroll on-infinite="loadOlderStories()" distance="1%">
+					</ion-infinite-scroll>
+				</ion-content>
+			</ion-slide-page>
+			<!-- REDDIT top page END -->
+			<!-- REDDIT img page START -->
+			<ion-slide-page>
+				<ion-header-bar class="newsbar redditheadbar" >
+					<img src="/img/reddit.jpg"/"><a class="reddittitle">/funny ~ img</a>
+				</ion-header-bar>
+				<ion-content>
+					<!-- refresh no pull up -->
+					<ion-refresher
+					pulling-text="Pull to refresh..."
+					on-refresh="loadNewerStoriesimg()">
+				</ion-refresher>
+				<!-- Div lista START -->
+				<div class="list">
+					<a  class="item" ng-click="openLink(storyimg.url)" href="{{storyimg.url}}" target="_blank" ng-repeat="storyimg in storiesimg track by storyimg.id" style="text-align:center">
+						<!-- if ends .jpg ou .png = print -->
+						<img class="redditimgs" ng-src="{{storyimg.url}}"/>	
+					</a>
+				</div>
+				<!-- Div lista END -->
+				<!-- pull older stories no scroll down -->
+				<ion-infinite-scroll on-infinite="loadOlderStoriesimg()" distance="1%">
+				</ion-infinite-scroll>
+			</ion-content>
+		</ion-slide-page>
+		<!-- REDDIT img page END -->
+	</ion-slides>
+	<!-- Slider END -->
+</ion-pane>
+</body>
 </html>

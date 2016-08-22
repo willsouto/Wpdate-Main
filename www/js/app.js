@@ -1,7 +1,8 @@
 (function() {
 
-var app = angular.module('myreddit', ['ionic' , 'angularMoment']);
-app.controller('RedditCtrl', function($http, $scope) {
+var app = angular.module('wpdate', ['ionic' , 'angularMoment']);
+app.controller('WpdateCtrl', function($http, $scope) {
+  
   $scope.stories = [];
 
 
@@ -40,7 +41,7 @@ app.controller('RedditCtrl', function($http, $scope) {
 
   /** DOLAR END **/
 
-/** REDDIT START **/
+/** REDDIT top START **/
 
   /** load de historia **/
   function loadStories(params, callback){
@@ -87,7 +88,58 @@ app.controller('RedditCtrl', function($http, $scope) {
       windows.open(url, '_blank');
     };
 
-    /** REDDIT END **/
+    /** REDDIT top END **/
+
+    
+    /** REDDIT funny START **/
+    $scope.storiesimg = [];
+  /** load de img **/
+  function loadStoriesimg(params, callback){
+      $http.get('https://www.reddit.com/r/funny/.json', {params:params})
+        .success(function(response){
+          var storiesimg = [];
+          angular.forEach(response.data.children, function(child){
+            var storyimg = child.data;
+            if (storyimg.domain != 'i.redd.it' && storyimg.domain != 'img.photobucket.com' && storyimg.domain != 'i.imgur.com' && storyimg.domain != 'files.explosm.net' && storyimg.domain != 'lolzcart.com'){
+              if(storyimg.domain == 'imgur.com' && storyimg.domain != 'imgur.com/gallery'){
+                storyimg.url = storyimg.url+".jpg";
+                }
+                else{
+              storyimg.url = storyimg.url;
+              }
+            }
+            
+           storiesimg.push(child.data);
+           console.log($scope.storiesimg);
+          });
+          callback(storiesimg);
+        });
+  };
+
+  /** load de historia antiga no scroll down **/
+    $scope.loadOlderStoriesimg = function(){
+      var params = {};
+      if($scope.storiesimg.length > 0){
+        params['after'] = $scope.storiesimg[$scope.storiesimg.length - 1].name;
+      }
+      loadStoriesimg(params , function(olderStoriesimg){
+        $scope.storiesimg = $scope.storiesimg.concat(olderStoriesimg);
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+      });
+    };
+
+
+  /** load de historia recent no scroll up **/
+    $scope.loadNewerStoriesimg = function(){
+      var params = {'before': $scope.storiesimg[0].name};
+      loadStoriesimg(params, function(newerStoriesimg){
+        $scope.storiesimg = newerStoriesimg.concat($scope.storiesimg);
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+    };
+    
+
+    /** REDDIT funny END **/
 
     /** CNN START **/
     $scope.storiescnn = [];
