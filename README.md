@@ -4,6 +4,7 @@ Mobile App feito para uso pessoal, com foco em JSON possibilita consultar previs
 Feito utilizando HTML, CSS, JavaScript, Apache Cordova, Ionic,  Angular, bower e npm.
 <br/><br/><br/><br/>
 
+> Este repositório contém o projeto MAIN, melhor visualizado no browser, caso queira visualizar o app diretamente no Android utilize o repositório: https://github.com/willsouto/Wpdate-Android
 <div align="center">
 <img src="https://raw.githubusercontent.com/willsouto/Wpdate-main/master/ss/wpdate.jpg" ></img>
 
