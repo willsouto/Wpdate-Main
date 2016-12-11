@@ -1,0 +1,14 @@
+temp:
+https://api.wunderground.com/api/8ed586309bee0204/conditions/forecast/lang:BR/q/BR/Santo_Andre.json
+
+dolar:
+http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%3D%22USDBRL%22&format=json&diagnostics=false&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys
+
+reddit:
+https://www.reddit.com/top/.json
+
+cnn:
+https://newsapi.org/v1/articles?source=cnn&sortBy=top&apiKey=427a9b85ce36450c9375d60c4e974c37
+
+nyt:
+https://newsapi.org/v1/articles?source=the-new-york-times&sortBy=popular&apiKey=427a9b85ce36450c9375d60c4e974c37
